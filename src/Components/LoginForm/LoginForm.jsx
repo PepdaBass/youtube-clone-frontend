@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./LoginForm.css";
 import axios from "axios";
+import { Link, Route, Routes } from "react-router-dom";
+import RegistrationForm from "../RegistrationForm/RegistrationForm";
 
 const LoginForm = (props) => {
+
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+
 
   async function loginUser(userInfo) {
     let response = await axios.post(
@@ -12,6 +16,8 @@ const LoginForm = (props) => {
       userInfo
     );
     console.log(response);
+    localStorage.setItem('token', response.data.access);
+    window.location = '/';
   }
 
   function handleSubmit(event) {
@@ -44,7 +50,12 @@ const LoginForm = (props) => {
           onChange={(event) => setPassword(event.target.value)}
         ></input>
         <button type="submit">Login</button>
-        <button type="submit">Sign-Up</button>
+        <Routes>
+        <Route exact path="registration" element={<RegistrationForm />} />
+        </Routes>
+        <Link to='registration'>
+        <button>Sign-Up</button>
+        </Link>
       </form>
     </div>
   );

@@ -8,9 +8,6 @@ const NavBar = (props) => {
                 <Link to="loginform">
                 <li>Login</li>
                 </Link>
-                <Link to="registration">
-                <li>Signup</li>
-                </Link>
             </ul>
         </nav>
      );
