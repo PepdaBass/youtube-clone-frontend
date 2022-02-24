@@ -10,7 +10,6 @@ const LoginForm = (props) => {
     
     function handleSubmit(event){
         event.preventDefault();
-
     }
 
 
