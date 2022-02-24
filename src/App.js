@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import NavBar from "./Components/NavBar/NavBar";
 import React, { useState, useEffect } from 'react';
 import jwt_decode from "jwt-decode";
+import Home from "./Components/Home/Home";
 
 
 function App() {
@@ -27,6 +28,15 @@ function App() {
     <div className="App">
       <NavBar />
       <Routes>
+        <Route exact path="/" element={<LoginForm />} />
+        <Route path="/home" element={() => {
+          if (!user) {
+            return <LoginForm />
+          }
+          else {
+            return <Home user={user} />
+          }
+        }} />
         <Route path="loginform" element={<LoginForm user={user}/>} />
         <Route exact path="loginform/registration" element={<RegistrationForm />} />
       </Routes>
