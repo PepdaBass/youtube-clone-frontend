@@ -6,13 +6,13 @@ import NavBar from "./Components/NavBar/NavBar";
 
 function App() {
   return (
-  <div className="App">
-    <NavBar />
-    <Routes>
-      <Route path="loginform" element={<LoginForm/>}/>
-      <Route path="registration" element={<RegistrationForm/>}/>
-    </Routes>
-  </div>
+    <div className="App">
+      <NavBar />
+      <Routes>
+        <Route path="loginform" element={<LoginForm />} />
+        <Route path="registration" element={<RegistrationForm />} />
+      </Routes>
+    </div>
   );
 }
 
