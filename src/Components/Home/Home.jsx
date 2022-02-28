@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import VideoPlayer from '../VideoPlayer/VideoPlayer';
 
 
 const Home = (props) => {
@@ -6,9 +7,7 @@ const Home = (props) => {
     
     return ( 
         <div>
-            <iframe id="ytplayer" type="text/html" width="640" height="360"
-            src={`https://www.youtube.com/embed/${props.videoId}?autoplay=1`}
-            frameBorder="0"></iframe>
+            <VideoPlayer videoId={props.videoId}/>
         </div>
      );
 }
