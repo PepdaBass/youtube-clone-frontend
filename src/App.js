@@ -13,6 +13,8 @@ function App() {
   const [user, setUser] = useState(null);
   const [currentVideoId, setVideoId] = useState(null);
 
+  const [search, setSearch] = useState("");
+
 
   useEffect(() => {
     const jwt = localStorage.getItem("token");
@@ -26,7 +28,7 @@ function App() {
 
   async function getVideo(request) {
     let response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?q=letterkenny+stewart+roald&key=${keys.googleAPIkey}`
+      `https://www.googleapis.com/youtube/v3/search?q=${search}&key=${keys.googleAPIkey}`
     );
     console.log(response);
     console.log(response.data.items[0].id.videoId)
@@ -35,7 +37,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar />
+      <NavBar search={search} setSearch={setSearch} getVideo={getVideo} />
       <Routes>
         <Route exact path="/" element={<Home videoId={currentVideoId}/>} />
         <Route
