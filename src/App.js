@@ -11,6 +11,8 @@ import keys from "./API_keys.json";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [currentVideoId, setVideoId] = useState(null);
+
 
   useEffect(() => {
     const jwt = localStorage.getItem("token");
@@ -19,6 +21,7 @@ function App() {
       const decodedUser = jwt_decode(jwt);
       setUser(decodedUser);
     } catch {}
+    getVideo()
   }, []);
 
   async function getVideo(request) {
@@ -26,17 +29,15 @@ function App() {
       `https://www.googleapis.com/youtube/v3/search?q=letterkenny+stewart+roald&key=${keys.googleAPIkey}`
     );
     console.log(response);
+    console.log(response.data.items[0].id.videoId)
+    setVideoId(response.data.items[0].id.videoId)
   }
-
-  // useEffect(() => {
-  //   getVideo();
-  // }, []);
 
   return (
     <div className="App">
       <NavBar />
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route exact path="/" element={<Home videoId={currentVideoId}/>} />
         <Route
           path="home"
           element={() => {
@@ -47,7 +48,7 @@ function App() {
             }
           }}
         />
-        <Route path="loginform" element={<LoginForm user={user} />} />
+        <Route path="loginform/*" element={<LoginForm user={user} />} />
         <Route
           exact
           path="loginform/registration"
