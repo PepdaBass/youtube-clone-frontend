@@ -12,9 +12,8 @@ import keys from "./API_keys.json";
 function App() {
   const [user, setUser] = useState(null);
   const [currentVideoId, setVideoId] = useState(null);
-
   const [search, setSearch] = useState("");
-
+  const [listRelatedVideos, setListRelatedVideos] = useState([]);
 
   useEffect(() => {
     const jwt = localStorage.getItem("token");
@@ -23,23 +22,36 @@ function App() {
       const decodedUser = jwt_decode(jwt);
       setUser(decodedUser);
     } catch {}
-    getVideo()
+    getVideo();
   }, []);
 
   async function getVideo(request) {
     let response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?q=${search}&key=${keys.googleAPIkey}`
+      `https://www.googleapis.com/youtube/v3/search?q=${search}&key=${keys.googleAPIkey}&part=snippet`
     );
-    console.log(response);
-    console.log(response.data.items[0].id.videoId)
-    setVideoId(response.data.items[0].id.videoId)
+    console.log(response.data);
+    // console.log(response);
+    // console.log(response.data.items[0].id.videoId);
+    setVideoId(response.data.items[0].id.videoId);
+    setListRelatedVideos(response.data.items);
+    console.log(listRelatedVideos);
   }
 
   return (
     <div className="App">
       <NavBar search={search} setSearch={setSearch} getVideo={getVideo} />
       <Routes>
-        <Route exact path="/" element={<Home videoId={currentVideoId}/>} />
+        <Route
+          exact
+          path="/"
+          element={
+            <Home
+              videoId={currentVideoId}
+              listRelatedVideos={listRelatedVideos}
+              setVideoId={setVideoId}
+            />
+          }
+        />
         <Route
           path="home"
           element={() => {
