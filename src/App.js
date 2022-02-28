@@ -28,8 +28,8 @@ function App() {
     <div className="App">
       <NavBar />
       <Routes>
-        <Route exact path="/" element={<LoginForm />} />
-        <Route path="/home" element={() => {
+        <Route exact path="/" element={<Home />} />
+        <Route path="home" element={() => {
           if (!user) {
             return <LoginForm />
           }
