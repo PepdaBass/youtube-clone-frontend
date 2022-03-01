@@ -11,7 +11,7 @@ import keys from "./API_keys.json";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [currentVideoId, setVideoId] = useState(null);
+  const [currentVideoId, setVideoId] = useState("erJAduG46ac");
   const [search, setSearch] = useState("");
   const [listRelatedVideos, setListRelatedVideos] = useState([]);
 
@@ -25,6 +25,10 @@ function App() {
     getVideo();
   }, []);
 
+  useEffect(() => {
+    getRelatedVideos();
+  }, [currentVideoId]);
+
   async function getVideo(request) {
     let response = await axios.get(
       `https://www.googleapis.com/youtube/v3/search?q=${search}&key=${keys.googleAPIkey}`
@@ -32,15 +36,25 @@ function App() {
     console.log(response.data);
     // console.log(response);
     // console.log(response.data.items[0].id.videoId);
-    setVideoId(response.data.items[0].id.videoId);
+    try {
+      setVideoId(response.data.items[0].id.videoId);
+    } catch {}
     //setListRelatedVideos(response.data.items);
+
     //console.log(listRelatedVideos);
   }
 
-  async function getRelatedVideos(request) {
-    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${currentVideoId}&type=video&key=${keys.googleAPIkey}&part=snippet`)
-    setListRelatedVideos(response.data.items);
-    console.log(response.data.items)
+  async function getRelatedVideos() {
+    console.log("hello!");
+    if (currentVideoId) {
+      let response = await axios.get(
+        `https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${currentVideoId}&type=video&key=${keys.googleAPIkey}&part=snippet`
+      );
+      setListRelatedVideos(response.data.items);
+      console.log(response.data.items);
+    } else {
+      console.log("No current video ID");
+    }
   }
 
   return (

@@ -7,13 +7,13 @@ const RelatedVideos = (props) => {
   //   props.getRelatedVideos()
   // }, []);
 
-  function handleSubmit(videoId){
-    console.log(videoId)
-    props.setVideoId(videoId)
-    props.getRelatedVideos()
-  }  
+  function handleSubmit(videoId) {
+    console.log(videoId);
+    props.setVideoId(videoId);
+    props.getRelatedVideos();
+  }
 
-  console.log(props.listRelatedVideos);
+  // console.log(props.listRelatedVideos);
 
   return (
     <div>
@@ -21,9 +21,13 @@ const RelatedVideos = (props) => {
         {props.listRelatedVideos.map((video, index) => {
           return (
             <li>
-            <button type='button' onClick={() => handleSubmit(video.id.videoId)}>
-              <img src={video.snippet.thumbnails.default.url} />
-            </button>
+              <button
+                type="button"
+                onClick={() => handleSubmit(video.id.videoId)}
+              >
+                {console.log("Video inside map", video)}
+                <img src={video.snippet.thumbnails.default.url} />
+              </button>
             </li>
           );
         })}
