@@ -11,7 +11,7 @@ const RelatedVideos = (props) => {
       let response = await axios.get(
         `https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${props.videoId}&type=video&key=${keys.googleAPIkey}&part=snippet`
       );
-      setListRelatedVideos(response.data.items.snippet);
+      setListRelatedVideos(response.data.items);
       console.log("related video list", response.data.items);
     } else {
       console.log("No current video ID");
@@ -19,13 +19,17 @@ const RelatedVideos = (props) => {
   }
 
   useEffect(() => {
-    getRelatedVideos();
-  }, [props.videoId]);
+    let mounted = true;
+    if(mounted){
+      getRelatedVideos();
+    }
+    return () => mounted = false;
+  }, [])
 
   function handleSubmit(videoId) {
     console.log(videoId);
     props.setVideoId(videoId);
-    props.getRelatedVideos();
+    getRelatedVideos();
   }
 
   return (
@@ -33,13 +37,13 @@ const RelatedVideos = (props) => {
       <ul>
         {listRelatedVideos.map((video, index) => {
           return (
-            <li>
+            <li key={index}>
               <button
                 type="button"
                 onClick={() => handleSubmit(video.id.videoId)}
               >
                 {console.log("Video inside map", video)}
-                <img src={video.thumbnails.default.url} alt="thumbnails" />
+                <img src={video.snippet.thumbnails.default.url} alt="thumbnails" />
               </button>
             </li>
           );
