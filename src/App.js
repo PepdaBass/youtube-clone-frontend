@@ -13,7 +13,6 @@ function App() {
   const [user, setUser] = useState(null);
   const [currentVideoId, setVideoId] = useState("erJAduG46ac");
   const [search, setSearch] = useState("");
-  const [listRelatedVideos, setListRelatedVideos] = useState([]);
 
   useEffect(() => {
     const jwt = localStorage.getItem("token");
@@ -25,37 +24,17 @@ function App() {
     getVideo();
   }, []);
 
-  useEffect(() => {
-    getRelatedVideos();
-  }, [currentVideoId]);
 
   async function getVideo(request) {
     let response = await axios.get(
       `https://www.googleapis.com/youtube/v3/search?q=${search}&key=${keys.googleAPIkey}`
     );
     console.log(response.data);
-    // console.log(response);
-    // console.log(response.data.items[0].id.videoId);
     try {
       setVideoId(response.data.items[0].id.videoId);
     } catch {}
-    //setListRelatedVideos(response.data.items);
-
-    //console.log(listRelatedVideos);
   }
 
-  async function getRelatedVideos() {
-    console.log("hello!");
-    if (currentVideoId) {
-      let response = await axios.get(
-        `https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${currentVideoId}&type=video&key=${keys.googleAPIkey}&part=snippet`
-      );
-      setListRelatedVideos(response.data.items.snippet);
-      console.log("related video list", response.data.items);
-    } else {
-      console.log("No current video ID");
-    }
-  }
 
   return (
     <div className="App">
@@ -67,9 +46,7 @@ function App() {
           element={
             <Home
               videoId={currentVideoId}
-              listRelatedVideos={listRelatedVideos}
               setVideoId={setVideoId}
-              getRelatedVideos={getRelatedVideos}
             />
           }
         />

@@ -1,11 +1,27 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+import keys from "../../API_keys.json";
 
 const RelatedVideos = (props) => {
-  // useEffect(() => {}, [...videos]);
 
-  // useEffect(() => {
-  //   props.getRelatedVideos()
-  // }, []);
+  const [listRelatedVideos, setListRelatedVideos] = useState([]);
+
+  async function getRelatedVideos() {
+    console.log("Called getRelatedVideos successfully");
+    if (props.videoId) {
+      let response = await axios.get(
+        `https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${props.videoId}&type=video&key=${keys.googleAPIkey}&part=snippet`
+      );
+      setListRelatedVideos(response.data.items.snippet);
+      console.log("related video list", response.data.items);
+    } else {
+      console.log("No current video ID");
+    }
+  }
+
+  useEffect(() => {
+    getRelatedVideos();
+  }, [props.videoId]);
 
   function handleSubmit(videoId) {
     console.log(videoId);
@@ -18,7 +34,7 @@ const RelatedVideos = (props) => {
   return (
     <div>
       <ul>
-        {props.listRelatedVideos.map((video, index) => {
+        {listRelatedVideos.map((video, index) => {
           return (
             <li>
               <button
@@ -32,30 +48,8 @@ const RelatedVideos = (props) => {
           );
         })}
       </ul>
-      {/* return (
-      <div>
-        <iframe
-          title="main-player"
-          id="ytplayer"
-          type="text/html"
-          width="360"
-          height="202"
-          src={`https://www.youtube.com/embed/${video.id.videoId}?autoplay=0`}
-          frameBorder="0"
-        ></iframe>
-      </div> */}
     </div>
   );
 };
 
 export default RelatedVideos;
-
-{
-  /* <button
-type="submit"
-onClick={props.setVideoId(video.id.videoId)}
-// href={`https://www.youtube.com/embed/${video.id.videoId}?autoplay=1`}
->
-<img src={video.snippet.thumbnails.default.url} />
-</button> */
-}
