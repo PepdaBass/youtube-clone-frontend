@@ -24,7 +24,6 @@ function App() {
     getVideo();
   }, []);
 
-
   async function getVideo(request) {
     let response = await axios.get(
       `https://www.googleapis.com/youtube/v3/search?q=${search}&key=${keys.googleAPIkey}`
@@ -35,7 +34,6 @@ function App() {
     } catch {}
   }
 
-
   return (
     <div className="App">
       <NavBar search={search} setSearch={setSearch} getVideo={getVideo} />
@@ -43,12 +41,7 @@ function App() {
         <Route
           exact
           path="/"
-          element={
-            <Home
-              videoId={currentVideoId}
-              setVideoId={setVideoId}
-            />
-          }
+          element={<Home videoId={currentVideoId} setVideoId={setVideoId} />}
         />
         <Route
           path="home"

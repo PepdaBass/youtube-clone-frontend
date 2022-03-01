@@ -3,7 +3,6 @@ import axios from "axios";
 import keys from "../../API_keys.json";
 
 const RelatedVideos = (props) => {
-
   const [listRelatedVideos, setListRelatedVideos] = useState([]);
 
   async function getRelatedVideos() {
@@ -28,8 +27,6 @@ const RelatedVideos = (props) => {
     props.setVideoId(videoId);
     props.getRelatedVideos();
   }
-
-  // console.log(props.listRelatedVideos);
 
   return (
     <div>

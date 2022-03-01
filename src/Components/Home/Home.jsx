@@ -10,7 +10,6 @@ const Home = (props) => {
         listRelatedVideos={props.listRelatedVideos}
         setVideoId={props.setVideoId}
         videoId={props.videoId}
-        getRelatedVideos={props.getRelatedVideos}
       />
     </div>
   );
