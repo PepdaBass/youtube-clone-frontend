@@ -9,6 +9,7 @@ const Home = (props) => {
       <RelatedVideos
         listRelatedVideos={props.listRelatedVideos}
         setVideoId={props.setVideoId}
+        videoId={props.videoId}
         getRelatedVideos={props.getRelatedVideos}
       />
     </div>

@@ -27,7 +27,7 @@ function App() {
 
   async function getVideo(request) {
     let response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?q=${search}&key=${keys.googleAPIkey}&part=snippet`
+      `https://www.googleapis.com/youtube/v3/search?q=${search}&key=${keys.googleAPIkey}`
     );
     console.log(response.data);
     // console.log(response);
@@ -38,9 +38,9 @@ function App() {
   }
 
   async function getRelatedVideos(request) {
-    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${currentVideoId}&type=video&key=${keys.googleAPIkey}`)
+    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${currentVideoId}&type=video&key=${keys.googleAPIkey}&part=snippet`)
     setListRelatedVideos(response.data.items);
-    console.log(response)
+    console.log(response.data.items)
   }
 
   return (
