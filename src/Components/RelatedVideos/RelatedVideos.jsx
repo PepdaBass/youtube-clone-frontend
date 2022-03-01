@@ -26,7 +26,7 @@ const RelatedVideos = (props) => {
                 onClick={() => handleSubmit(video.id.videoId)}
               >
                 {console.log("Video inside map", video)}
-                <img src={video.snippet.thumbnails.default.url} />
+                <img src={video.thumbnails.default.url} alt="thumbnails" />
               </button>
             </li>
           );

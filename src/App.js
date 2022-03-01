@@ -50,8 +50,8 @@ function App() {
       let response = await axios.get(
         `https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${currentVideoId}&type=video&key=${keys.googleAPIkey}&part=snippet`
       );
-      setListRelatedVideos(response.data.items);
-      console.log(response.data.items);
+      setListRelatedVideos(response.data.items.snippet);
+      console.log("related video list", response.data.items);
     } else {
       console.log("No current video ID");
     }
