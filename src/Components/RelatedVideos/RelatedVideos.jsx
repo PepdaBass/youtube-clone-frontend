@@ -24,29 +24,25 @@ const RelatedVideos = (props) => {
       getRelatedVideos();
     }
     return () => mounted = false;
-  }, [])
+  }, [props.videoId])
 
   function handleSubmit(videoId) {
     console.log(videoId);
     props.setVideoId(videoId);
-    getRelatedVideos();
   }
 
   return (
     <div>
       <ul>
         {listRelatedVideos.map((video, index) => {
-          return (
-            <li key={index}>
-              <button
-                type="button"
-                onClick={() => handleSubmit(video.id.videoId)}
-              >
-                {console.log("Video inside map", video)}
-                <img src={video.snippet.thumbnails.default.url} alt="thumbnails" />
-              </button>
-            </li>
-          );
+          if(video.snippet){
+            return(
+              <li key={index}>
+                <button type='button' onClick={() => handleSubmit(video.id.videoId)}>
+                <img src={video.snippet.thumbnails.default.url} alt="thumbnails"></img></button>
+              </li>
+            )
+          }
         })}
       </ul>
     </div>
