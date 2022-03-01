@@ -3,6 +3,11 @@ import React, { useEffect, useState } from "react";
 const RelatedVideos = (props) => {
   // useEffect(() => {}, [...videos]);
 
+  function handleSubmit(videoId){
+    console.log(videoId)
+    props.setVideoId(videoId)
+  }  
+
   console.log(props.listRelatedVideos);
 
   return (
@@ -10,11 +15,11 @@ const RelatedVideos = (props) => {
       <ul>
         {props.listRelatedVideos.map((video, index) => {
           return (
-            <a
-              href={`https://www.youtube.com/embed/${video.id.videoId}?autoplay=1`}
-            >
+            <li>
+            <button type='button' onClick={() => handleSubmit(video.id.videoId)}>
               <img src={video.snippet.thumbnails.default.url} />
-            </a>
+            </button>
+            </li>
           );
         })}
       </ul>
