@@ -3,9 +3,14 @@ import React, { useEffect, useState } from "react";
 const RelatedVideos = (props) => {
   // useEffect(() => {}, [...videos]);
 
+  // useEffect(() => {
+  //   props.getRelatedVideos()
+  // }, []);
+
   function handleSubmit(videoId){
     console.log(videoId)
     props.setVideoId(videoId)
+    props.getRelatedVideos()
   }  
 
   console.log(props.listRelatedVideos);

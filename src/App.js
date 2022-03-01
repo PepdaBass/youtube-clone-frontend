@@ -33,8 +33,14 @@ function App() {
     // console.log(response);
     // console.log(response.data.items[0].id.videoId);
     setVideoId(response.data.items[0].id.videoId);
+    //setListRelatedVideos(response.data.items);
+    //console.log(listRelatedVideos);
+  }
+
+  async function getRelatedVideos(request) {
+    let response = await axios.get(`https://www.googleapis.com/youtube/v3/search?relatedToVideoId=${currentVideoId}&type=video&key=${keys.googleAPIkey}`)
     setListRelatedVideos(response.data.items);
-    console.log(listRelatedVideos);
+    console.log(response)
   }
 
   return (
@@ -49,6 +55,7 @@ function App() {
               videoId={currentVideoId}
               listRelatedVideos={listRelatedVideos}
               setVideoId={setVideoId}
+              getRelatedVideos={getRelatedVideos}
             />
           }
         />

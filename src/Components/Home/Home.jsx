@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
 import RelatedVideos from "../RelatedVideos/RelatedVideos";
 
@@ -9,6 +9,7 @@ const Home = (props) => {
       <RelatedVideos
         listRelatedVideos={props.listRelatedVideos}
         setVideoId={props.setVideoId}
+        getRelatedVideos={props.getRelatedVideos}
       />
     </div>
   );
