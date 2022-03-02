@@ -12,9 +12,7 @@ const LoginForm = (props) => {
 
   async function loginUser(userInfo) {
     let response = await axios.post(
-      "http://127.0.0.1:8000/api/auth/login/",
-      userInfo
-    );
+      "http://127.0.0.1:8000/api/auth/login/", userInfo);
     console.log(response);
     localStorage.setItem('token', response.data.access);
     window.location = '/';

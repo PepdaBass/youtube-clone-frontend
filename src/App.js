@@ -22,6 +22,7 @@ function App() {
       setUser(decodedUser);
     } catch {}
     getVideo();
+    console.log( 'app level console log user' ,user)
   }, []);
 
   async function getVideo(request) {
@@ -41,7 +42,7 @@ function App() {
         <Route
           exact
           path="/"
-          element={<Home videoId={currentVideoId} setVideoId={setVideoId} />}
+          element={<Home videoId={currentVideoId} setVideoId={setVideoId} user={user} setUser={setUser}/>}
         />
         <Route
           path="home"

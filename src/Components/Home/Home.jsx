@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import VideoPlayer from "../VideoPlayer/VideoPlayer";
 import RelatedVideos from "../RelatedVideos/RelatedVideos";
+import CommentForm from "../CommentForm/CommentForm";
 
 const Home = (props) => {
   return (
@@ -11,6 +12,7 @@ const Home = (props) => {
         setVideoId={props.setVideoId}
         videoId={props.videoId}
       />
+      <CommentForm user={props.user} videoId={props.videoId} setUser={props.setUser}/>
     </div>
   );
 };
