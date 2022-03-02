@@ -15,7 +15,7 @@ const Home = (props) => {
         videoId={props.videoId}
       />
       <CommentForm user={props.user} videoId={props.videoId} setUser={props.setUser}/>
-      <Comment user={props.user} videoId={props.videoId} />
+      <Comment user={props.user} videoId={props.videoId} storedUserName={props.storedUserName}/>
     </div>
   );
 };

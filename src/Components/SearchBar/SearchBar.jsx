@@ -9,6 +9,7 @@ const SearchBar = (props) => {
         event.preventDefault();
         console.log(props.search);
         props.getVideo();
+        props.setSearch('')
     }
 
     return ( 

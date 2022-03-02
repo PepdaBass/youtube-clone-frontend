@@ -8,7 +8,7 @@ const Comment = (props) => {
 
   async function getVideoComment(videoId) {
     let response = await axios.get(
-      `http://127.0.0.1:8000/comments/${props.videoId}/`
+      `http://127.0.0.1:8000/comments/${videoId}/`
     );
     setComments(response.data);
   }
@@ -28,7 +28,7 @@ const Comment = (props) => {
         if (comment.video_id){
         return (
           <div>
-            <div className="username">{props.user.username}</div>
+            <div className="username">{comment.user.username}</div>
             <span className="comment-text">{comment.text}</span>
             <div>
               <p>{comment.likes} Likes</p>

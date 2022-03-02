@@ -10,9 +10,11 @@ import axios from "axios";
 import keys from "./API_keys.json";
 
 function App() {
+  const [videoTitle, setVideoTitle] = useState("");
   const [user, setUser] = useState(null);
   const [currentVideoId, setVideoId] = useState("");
   const [search, setSearch] = useState("");
+  const [storedUserName, setStoredUserName] = useState('')
 
   useEffect(() => {
     const jwt = localStorage.getItem("token");
@@ -22,7 +24,6 @@ function App() {
       setUser(decodedUser);
     } catch {}
     getVideo();
-    console.log( 'app level console log user' ,user)
   }, []);
 
   async function getVideo(request) {
@@ -42,7 +43,7 @@ function App() {
         <Route
           exact
           path="/"
-          element={<Home videoId={currentVideoId} setVideoId={setVideoId} user={user} setUser={setUser}/>}
+          element={<Home videoId={currentVideoId} setVideoId={setVideoId} user={user} setUser={setUser} storedUserName={storedUserName}/>}
         />
         <Route
           path="home"
@@ -54,7 +55,7 @@ function App() {
             }
           }}
         />
-        <Route path="loginform/*" element={<LoginForm user={user} />} />
+        <Route path="loginform/*" element={<LoginForm user={user} setStoredUserName={setStoredUserName}/>} />
         <Route
           exact
           path="loginform/registration"

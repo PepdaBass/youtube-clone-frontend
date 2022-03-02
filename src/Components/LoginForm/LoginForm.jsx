@@ -24,6 +24,7 @@ const LoginForm = (props) => {
       username: userName,
       password: password,
     };
+    props.setStoredUserName(userInfo.username)
     loginUser(userInfo);
   }
 
