@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { Component, useState, useEffect } from "react";
+import Reply from "../Reply/Reply";
 
 const Comment = (props) => {
   const [comments, setComments] = useState([]);
@@ -17,26 +18,28 @@ const Comment = (props) => {
     let mounted = true;
     if (mounted) {
       getVideoComment(props.videoId);
-      console.log("mounted test")
+      console.log("mounted test");
     }
-    return () => mounted = false;
-  }, [props.videoId])
+    return () => (mounted = false);
+  }, [props.videoId]);
 
   return (
     <div>
       {comments.map((comment, index) => {
-        if (comment.video_id){
-        return (
-          <div>
-            <div className="username">{comment.user.username}</div>
-            <span className="comment-text">{comment.text}</span>
+        if (comment.video_id) {
+          return (
             <div>
-              <p>{comment.likes} Likes</p>
-              <p>{comment.dislikes} Dislikes</p>
-          </div>
-          <button type="submit">Reply</button>
-          </div>
-        )}
+              <div className="username">{comment.user.username}</div>
+              <span className="comment-text">{comment.text}</span>
+              <div>
+                <p>{comment.likes} Likes</p>
+                <p>{comment.dislikes} Dislikes</p>
+              </div>
+              <button type="submit">Reply</button>
+              <Reply commentId={comments.id} videoId={props.videoId} />
+            </div>
+          );
+        }
       })}
     </div>
   );
