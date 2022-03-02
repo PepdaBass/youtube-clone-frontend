@@ -11,7 +11,7 @@ import keys from "./API_keys.json";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [currentVideoId, setVideoId] = useState("erJAduG46ac");
+  const [currentVideoId, setVideoId] = useState("");
   const [search, setSearch] = useState("");
 
   useEffect(() => {
@@ -26,9 +26,9 @@ function App() {
 
   async function getVideo(request) {
     let response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/search?q=${search}&key=${keys.googleAPIkey}`
+      `https://www.googleapis.com/youtube/v3/search?q=${search}&key=${keys.googleAPIkey}&type=video`
     );
-    console.log(response.data);
+    console.log("getVideo function response data", response.data);
     try {
       setVideoId(response.data.items[0].id.videoId);
     } catch {}
