@@ -5,8 +5,10 @@ const Reply = (props) => {
   const [replies, setReplies] = useState([]);
 
   async function getCommentReplies(commentId) {
+    const jwt = localStorage.getItem("token");
     let response = await axios.get(
-      `http://127.0.0.1:8000/replies/${commentId}/`
+      `http://127.0.0.1:8000/replies/${commentId}/`,
+      {headers: { Authorization: "Bearer " + jwt }}
     );
     setReplies(response.data);
   }
@@ -28,7 +30,6 @@ const Reply = (props) => {
             <div>
               <div className="username">{reply.user.username}</div>
               <span className="reply-text">{reply.text}</span>
-              <button type="submit">Reply</button>
             </div>
           );
         }

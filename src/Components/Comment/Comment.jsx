@@ -6,6 +6,13 @@ const Comment = (props) => {
   const [comments, setComments] = useState([]);
   const [like, setLike] = useState(comments.likes);
   const [dislike, setDislike] = useState(comments.dislikes);
+  const [onReplyClick, setOnReplyClick] = useState(false);
+  const [commentId, setCommentId] = useState(0)
+
+  function handleClick(comment){
+    setOnReplyClick(!onReplyClick)
+    setCommentId(comment.id)
+  }
 
   async function getVideoComment(videoId) {
     let response = await axios.get(
@@ -35,8 +42,9 @@ const Comment = (props) => {
                 <p>{comment.likes} Likes</p>
                 <p>{comment.dislikes} Dislikes</p>
               </div>
-              <button type="submit">Reply</button>
-              <Reply commentId={comments.id} videoId={props.videoId} />
+              <button className="button" type="button" onClick={() => handleClick(comment)}>Reply</button>
+              {}
+              <Reply commentId={commentId} videoId={props.videoId} />
             </div>
           );
         }
