@@ -9,16 +9,16 @@ const NavBar = (props) => {
     <Navbar bg="light" expand="lg">
       <Container fluid>
         <Navbar.Brand href="#">YouTube-ish</Navbar.Brand>
-        {/* <Nav.Link to="loginform">Login</Nav.Link> */}
 
         <SearchBar
           search={props.search}
           setSearch={props.setSearch}
           getVideo={props.getVideo}
         />
-        <Button to="loginform" variant="outline-success">
-          Login
-        </Button>
+        <Link to="loginform">
+          <li>Login</li>
+        </Link>
+        <Button>Logout</Button> 
       </Container>
     </Navbar>
 

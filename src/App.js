@@ -37,9 +37,24 @@ function App() {
     } catch {}
   }
 
+  //To-Finish: Logout User functionality
+
+  // let logoutUser = (user) => {
+  //   // setAuthTokens(null);
+  //   setUser(null);
+  //   localStorage.removeItem("token");
+  //   // history.pushState("/login");
+  //   console.log("local storage test", user);
+  // };
+
   return (
     <div className="App">
-      <NavBar search={search} setSearch={setSearch} getVideo={getVideo} />
+      <NavBar
+        search={search}
+        setSearch={setSearch}
+        getVideo={getVideo}
+        // logoutUser={logoutUser}
+      />
       <Routes>
         <Route
           exact
