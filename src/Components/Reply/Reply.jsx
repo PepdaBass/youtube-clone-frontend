@@ -8,7 +8,7 @@ const Reply = (props) => {
     const jwt = localStorage.getItem("token");
     let response = await axios.get(
       `http://127.0.0.1:8000/replies/${commentId}/`,
-      {headers: { Authorization: "Bearer " + jwt }}
+      { headers: { Authorization: "Bearer " + jwt } }
     );
     setReplies(response.data);
   }
@@ -25,7 +25,7 @@ const Reply = (props) => {
   return (
     <div>
       {replies.map((reply, index) => {
-        if (reply.comment_id) {
+        if (reply.comment_id === props.commentId) {
           return (
             <div>
               <div className="username">{reply.user.username}</div>

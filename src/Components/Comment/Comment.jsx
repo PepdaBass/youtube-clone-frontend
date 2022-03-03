@@ -1,17 +1,19 @@
 import axios from "axios";
 import React, { Component, useState, useEffect } from "react";
 import Reply from "../Reply/Reply";
+import Card from "react-bootstrap";
+import "../Comment/Comment.css";
 
 const Comment = (props) => {
   const [comments, setComments] = useState([]);
   const [like, setLike] = useState(comments.likes);
   const [dislike, setDislike] = useState(comments.dislikes);
   const [onReplyClick, setOnReplyClick] = useState(false);
-  const [commentId, setCommentId] = useState(0)
+  const [commentId, setCommentId] = useState(0);
 
-  function handleClick(comment){
-    setOnReplyClick(!onReplyClick)
-    setCommentId(comment.id)
+  function handleClick(comment) {
+    setOnReplyClick(!onReplyClick);
+    setCommentId(comment.id);
   }
 
   async function getVideoComment(videoId) {
@@ -31,7 +33,7 @@ const Comment = (props) => {
   }, [props.videoId]);
 
   return (
-    <div>
+    <div className="comment">
       {comments.map((comment, index) => {
         if (comment.video_id) {
           return (
@@ -42,7 +44,13 @@ const Comment = (props) => {
                 <p>{comment.likes} Likes</p>
                 <p>{comment.dislikes} Dislikes</p>
               </div>
-              <button className="button" type="button" onClick={() => handleClick(comment)}>Reply</button>
+              <button
+                className="button"
+                type="button"
+                onClick={() => handleClick(comment)}
+              >
+                Reply
+              </button>
               {}
               <Reply commentId={commentId} videoId={props.videoId} />
             </div>
@@ -54,3 +62,32 @@ const Comment = (props) => {
 };
 
 export default Comment;
+
+//
+
+{
+  /* <div>
+      {comments.map((comment, index) => {
+        if (comment.video_id) {
+          return (
+            <Card style={{ width: "18rem" }}>
+              <Card.Body>
+                <Card.Title>{comment.user.username}</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">
+                  Card Subtitle
+                </Card.Subtitle>
+                <Card.Text className="comment-text">{comment.text}</Card.Text>
+                <Card.Button
+                  className="button"
+                  type="button"
+                  onClick={() => handleClick(comment)}
+                >
+                  Reply
+                </Card.Button>
+              </Card.Body>
+            </Card>
+          );
+        }
+      })}
+    </div> */
+}

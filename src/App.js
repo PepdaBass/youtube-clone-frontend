@@ -8,13 +8,14 @@ import jwt_decode from "jwt-decode";
 import Home from "./Components/Home/Home";
 import axios from "axios";
 import keys from "./API_keys.json";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [videoTitle, setVideoTitle] = useState("");
   const [user, setUser] = useState(null);
   const [currentVideoId, setVideoId] = useState("");
   const [search, setSearch] = useState("");
-  const [storedUserName, setStoredUserName] = useState('')
+  const [storedUserName, setStoredUserName] = useState("");
 
   useEffect(() => {
     const jwt = localStorage.getItem("token");
@@ -43,7 +44,15 @@ function App() {
         <Route
           exact
           path="/"
-          element={<Home videoId={currentVideoId} setVideoId={setVideoId} user={user} setUser={setUser} storedUserName={storedUserName}/>}
+          element={
+            <Home
+              videoId={currentVideoId}
+              setVideoId={setVideoId}
+              user={user}
+              setUser={setUser}
+              storedUserName={storedUserName}
+            />
+          }
         />
         <Route
           path="home"
@@ -55,7 +64,12 @@ function App() {
             }
           }}
         />
-        <Route path="loginform/*" element={<LoginForm user={user} setStoredUserName={setStoredUserName}/>} />
+        <Route
+          path="loginform/*"
+          element={
+            <LoginForm user={user} setStoredUserName={setStoredUserName} />
+          }
+        />
         <Route
           exact
           path="loginform/registration"

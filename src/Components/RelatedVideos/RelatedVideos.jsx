@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import keys from "../../API_keys.json";
+import "../RelatedVideos/RelatedVideos.css";
 
 const RelatedVideos = (props) => {
   const [listRelatedVideos, setListRelatedVideos] = useState([]);
@@ -20,11 +21,11 @@ const RelatedVideos = (props) => {
 
   useEffect(() => {
     let mounted = true;
-    if(mounted){
+    if (mounted) {
       getRelatedVideos();
     }
-    return () => mounted = false;
-  }, [props.videoId])
+    return () => (mounted = false);
+  }, [props.videoId]);
 
   function handleSubmit(videoId) {
     console.log(videoId);
@@ -35,13 +36,20 @@ const RelatedVideos = (props) => {
     <div>
       <ul>
         {listRelatedVideos.map((video, index) => {
-          if(video.snippet){
-            return(
+          if (video.snippet) {
+            return (
               <li key={index}>
-                <button type='button' onClick={() => handleSubmit(video.id.videoId)}>
-                <img src={video.snippet.thumbnails.default.url} alt="thumbnails"></img></button>
+                <button
+                  type="button"
+                  onClick={() => handleSubmit(video.id.videoId)}
+                >
+                  <img
+                    src={video.snippet.thumbnails.default.url}
+                    alt="thumbnails"
+                  ></img>
+                </button>
               </li>
-            )
+            );
           }
         })}
       </ul>
