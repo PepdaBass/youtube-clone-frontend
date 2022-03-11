@@ -5,20 +5,20 @@ services:
     container_name: youtube-clone-frontend-dev
     build:
       context: ./
-      # dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.dev
     volumes:
       - .:/app
       - ./node_modules:/app/node_modules
     ports:
       - "3002:3000"
 
-  youtube-clone-frontend-test:
-    container_name: youtube-clone-frontend-test
-    image: youtube-clone-frontend
-    # build:
-    #   context: ./
-    #   dockerfile: Dockerfile.dev
-    volumes:
-      - .:/app
-      - ./node_modules:/app/node_modules
-    command: ["npm", "run", "test"]
+  # youtube-clone-frontend-test:
+  #   container_name: youtube-clone-frontend-test
+  #   image: youtube-clone-frontend
+  #   # build:
+  #   #   context: ./
+  #   #   dockerfile: Dockerfile.dev
+  #   volumes:
+  #     - .:/app
+  #     - ./node_modules:/app/node_modules
+  #   command: ["npm", "run", "test"]
