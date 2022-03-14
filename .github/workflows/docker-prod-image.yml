@@ -1,0 +1,27 @@
+name: Production Build
+
+env:
+  DATE_STAMP: $(date +%s)
+
+on:
+  push:
+    branches: [Docker-Feature1]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+
+    - name: Set ENV Vars
+      run: echo "date-stamp=$"{{env.DATE_STAMP}}" >> $GITHUB_ENV
+
+    - name: Build Docker Image
+      run: docker build . --file Dockerfile --tag thidges/youtubeclonefrontend:latest
+
+    - name: Add "date-stamp" tag to image
+      run: docker image tag youtube-clone-frontend:latest youtube-clone-frontend:${{ env.date-stamp }}
