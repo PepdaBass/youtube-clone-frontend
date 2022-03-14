@@ -24,4 +24,4 @@ jobs:
       run: docker build . --file Dockerfile --tag thidges/youtubeclonefrontend:latest
 
     - name: Add "date-stamp" tag to image
-      run: docker image tag youtube-clone-frontend:latest youtube-clone-frontend:${{ env.date-stamp }}
+      run: docker image tag youtube-clone-frontend:latest youtube-clone-frontend:${{env.date-stamp}}
